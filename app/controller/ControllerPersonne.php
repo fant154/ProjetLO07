@@ -77,8 +77,9 @@ class ControllerPersonne {
 
         // ----- Construction chemin de la vue
         include 'config.php';
-        $_SESSION = array();
+       
         session_destroy();
+        
         $vue = $root . '/app/view/viewAccueil.php';
         if (DEBUG)
             echo ("ControllerProducteur : producteurReadAll : vue = $vue");

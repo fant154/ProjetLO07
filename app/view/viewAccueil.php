@@ -1,7 +1,7 @@
  
 <!-- ----- debut de la page cave_acceuil -->
 <?php if(!isset($_SESSION)){
-    session_start();
+    //session_start();
 }?>
 <?php include 'fragment/fragmentDoctolibHeader.html'; ?>
 <body>
