@@ -25,7 +25,7 @@
                         <li><a class="dropdown-item" href="router.php?action=vinCreate">Insertion d'une nouvelle spécialité</a></li> 
                         <li><hr></li> 
                         <li><a class="dropdown-item" href="router.php?action=vinCreate">Liste des praticiens avec leur spécialité</a></li> 
-                        <li><a class="dropdown-item" href="router.php?action=vinCreate">Nombre de praticiens par paatient</a></li> 
+                        <li><a class="dropdown-item" href="router.php?action=vinCreate">Nombre de praticiens par patient</a></li> 
                         <li><hr></li>
                         <li><a class="dropdown-item" href="router.php?action=vinCreate">Info</a></li> 
                     </ul>
