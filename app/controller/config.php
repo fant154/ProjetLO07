@@ -8,11 +8,7 @@ if (!defined('DEBUG')) {
     
     
 }
-function visu($table){
-         echo"<pre>";
-      print_r($table);
-      echo"</pre>";
-    }
+
 // ===============
 // Configuration de la base de données sur dev-isi
 
