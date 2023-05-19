@@ -5,8 +5,18 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="router.php?action=viewAccueil">SCHMITT BESNARD <?php
             if (!empty($_SESSION)) {
+                if (isset($_SESSION['status'])){
+                    $status = '';
+                    if($_SESSION['status']== 0)
+                        $status = "| Administrateur";
+                    elseif($_SESSION['status']== 1)
+                        $status = "| Praticien";
+                    elseif($_SESSION['status']== 2)
+                        $status = "| Patient";
+                        
+                }
                 
-                printf(" | %s %s", $_SESSION['nom'], $_SESSION['prenom']);
+                printf("%s  | %s %s",$status,  $_SESSION['nom'], $_SESSION['prenom']);
             };
             // The session is empty
             ?></a> <!-- add role and username -->

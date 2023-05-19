@@ -55,10 +55,13 @@ class ControllerPersonne {
                 $currentUserName = $name;
                 $currentUserFirstName = $firstName;
             };
+            $currentUserStatus = ModelPersonne::getStatusWithId($currentUserId);
             session_start();
             $_SESSION['nom'] = $currentUserName;
             $_SESSION['prenom'] = $currentUserFirstName;
             $_SESSION['id'] = $currentUserId;
+            $_SESSION['status'] = $currentUserStatus;
+            echo $currentUserStatus;
             $vue = $root . '/app/view/viewAccueil.php';
         } else {
             $vue = $root . '/app/view/user/viewLoginError.php';
@@ -93,6 +96,7 @@ class ControllerPersonne {
             $_SESSION['nom'] = $infos_name;
             $_SESSION['prenom'] = $infos_name;
             $_SESSION['id'] = $results;
+            $_SESSION['status'] = $infos_status;
             $vue = $root . '/app/view/user/viewSigninSuccess.php';
         } else {
             $vue = $root . '/app/view/user/viewSigninError.php';

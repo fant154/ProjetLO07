@@ -142,6 +142,23 @@ class ModelPersonne {
             return NULL;
         }
     }
+    
+        public static function getStatusWithId($currentUserId) {
+        try {
+            $database = Model::getInstance();
+            $query = "select statut from personne where id = :currentUserId";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'currentUserId' => $currentUserId
+            ]);
+            $results = $statement->fetch();
+           $status  = $results['statut'];
+            return $status;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 
     public static function insert($nom, $prenom, $adresse, $login, $password, $status, $specialite) {
         try {
