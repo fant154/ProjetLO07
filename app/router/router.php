@@ -19,6 +19,7 @@ switch ($action) {
     case "readLoginInfos" :
     case "loginInfosAnalysis" :
     case "readSigninInfos":
+    case "signinInfosAnalysis":
     case "userLogout":
     case "viewAccueil":
         ControllerPersonne::$action();
