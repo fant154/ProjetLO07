@@ -76,10 +76,14 @@ class ControllerPersonne {
     public static function userLogout() {
 
         // ----- Construction chemin de la vue
+        session_start();
         include 'config.php';
-       
+       unset($_SESSION['nom']);
+       unset($_SESSION['prenom']);
         session_destroy();
+        session_unset();
         
+        unset($_SESSION);
         $vue = $root . '/app/view/viewAccueil.php';
         if (DEBUG)
             echo ("ControllerProducteur : producteurReadAll : vue = $vue");
