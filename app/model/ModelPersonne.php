@@ -204,21 +204,94 @@ class ModelPersonne {
             return NULL;
         }
     }
-
-    public static function getAll() {
+// On récupère toutes les spécialités dans un tableau numéroté
+    public static function getAllspecialite() {
         try {
             $database = Model::getInstance();
-            $query = "select * from producteur";
+            $query = "select * from specialite";
             $statement = $database->prepare($query);
             $statement->execute();
-            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelProducteur");
+            $results = $statement->fetchAll(PDO::FETCH_NUM);
             return $results;
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;
         }
     }
+    
+    // on récupère tout les ID des specialite
+    public static function getAllIdspecialite() {
+      try {
+       $database = Model::getInstance();
+       $query = "select id from specialite";
+       $statement = $database->prepare($query);
+       $statement->execute();
+       $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+       return $results;
+      } catch (PDOException $e) {
+       printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+       return NULL;
+      }
+     }
+     
+     // On récupère un ID spécifique 
+     public static function getOneSpe($id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select * from specialite where id = :id";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'id' => $id
+            ]);
+            $results = $statement->fetchAll(PDO::FETCH_NUM);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
+     
+    // insertion d'une spe
+     public static function specialiteInsert($specialite) {
+  try {
+   $database = Model::getInstance();
 
+   // recherche de la valeur de la clé = max(id) + 1
+   $query = "select max(id) from specialite";
+   $statement = $database->query($query);
+   $tuple = $statement->fetch();
+   $id = $tuple['0'];
+   $id++;
+
+   // ajout d'un nouveau tuple;
+   $query = "insert into vin value (:id, :specialite)";
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'id' => $id,
+     'specialite' => $specialite
+   ]);
+   return $id;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return -1;
+  }
+ }
+    // On récupère tous les praticiens à continuer
+    public static function getAllPraticien(){
+        try {
+       $database = Model::getInstance();
+       $query = "select * from praticien";
+       $statement = $database->prepare($query);
+       $statement->execute();
+       $results = $statement->fetchAll(PDO::FETCH_CLASS,'ModelPersonne');
+       return $results;
+      } catch (PDOException $e) {
+       printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+       return NULL;
+      }
+    }
+ 
     public static function getOne($id) {
         try {
             $database = Model::getInstance();

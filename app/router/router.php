@@ -24,6 +24,13 @@ switch ($action) {
     case "viewAccueil":
         ControllerPersonne::$action();
         break;
+    case "listeSpecialite":
+    case "specialiteReadId":
+    case "specialiteReadOne":
+    case "specialiteCreate":
+    case "specialiteCreated":
+    case "listePraticien":
+        ControllerAdministrateur::$action();
 
     default:
         // $action = "doctolibAccueil";
