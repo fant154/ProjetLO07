@@ -1,11 +1,10 @@
 
-
 <!-- ----- debut ModelPersonne -->
 
 <?php
 require_once 'Model.php';
 
-class ModelPersonne {
+class ModelPersonne{
 
     private $id, $nom, $prenom, $adresse, $login, $password, $specialite, $specialite_id;
 
@@ -14,7 +13,7 @@ class ModelPersonne {
      const PATIENT = 2;
 
     // pas possible d'avoir 2 constructeurs
-    public function __construct($id = NULL, $nom = NULL, $prenom = NULL, $adresse = NULL, $login = NULL, $password = NULL, $specialite = NULL, $specialite_id = NULL) {
+    public function __construct($id = NULL, $nom = NULL, $prenom = NULL, $adresse = NULL, $login = NULL, $password = NULL, $specialite_id = NULL) {
         // valeurs nulles si pas de passage de parametres
         if (!is_null($id)) {
             $this->id = $id;
@@ -23,7 +22,7 @@ class ModelPersonne {
             $this->adresse = $adresse;
             $this->login = $login;
             $this->password = $password;
-            $this->specialite = $specialite;
+            
             $this->specialite_id = $specialite_id;
         }
     }
@@ -52,10 +51,6 @@ class ModelPersonne {
         $this->password = $password;
     }
 
-    function setSpecialite($specialite) {
-        $this->specialite = $specialite;
-    }
-
     function setSpecialite_id($specialite_id) {
         $this->specialite_id = $specialite_id;
     }
@@ -82,10 +77,6 @@ class ModelPersonne {
 
     function getPassword() {
         return $this->password;
-    }
-
-    function getSpecialite() {
-        return $this->specialite;
     }
 
     function getSpecialite_id() {
@@ -161,7 +152,7 @@ class ModelPersonne {
         }
     }
 
-    public static function insert($nom, $prenom, $adresse, $login, $password, $status, $specialite) {
+    public static function insert($nom, $prenom, $adresse, $login, $password, $status, $specialite_id) {
         try {
             $database = Model::getInstance();
 
@@ -173,7 +164,7 @@ class ModelPersonne {
             $id++;
 
             // ajout d'un nouveau tuple;
-            $query = "insert into personne value (:id, :nom, :prenom, :adresse, :login, :password, :status, :specialite)";
+            $query = "insert into personne value (:id, :nom, :prenom, :adresse, :login, :password, :status, :specialite_id)";
             $statement = $database->prepare($query);
             $statement->execute([
                 'id' => $id,
@@ -183,7 +174,7 @@ class ModelPersonne {
                 'login' => $login,
                 'password' => $password,
                 'status' => $status,
-                'specialite' => $specialite
+                'specialite_id' => $specialite_id
             ]);
             return $id;
         } catch (PDOException $e) {
@@ -265,7 +256,7 @@ class ModelPersonne {
    $id++;
 
    // ajout d'un nouveau tuple;
-   $query = "insert into vin value (:id, :specialite)";
+   $query = "insert into specialite value (:id, :specialite)";
    $statement = $database->prepare($query);
    $statement->execute([
      'id' => $id,
@@ -277,13 +268,13 @@ class ModelPersonne {
    return -1;
   }
  }
-    // On récupère tous les praticiens à continuer
-    public static function getAllPraticien(){
+    // On récupère tous les praticiens 
+    public static function getAllPeople($status){
         try {
        $database = Model::getInstance();
-       $query = "select * from praticien";
+       $query = "select * from personne where status= :status";
        $statement = $database->prepare($query);
-       $statement->execute();
+       $statement->execute(['status'=> $status]);
        $results = $statement->fetchAll(PDO::FETCH_CLASS,'ModelPersonne');
        return $results;
       } catch (PDOException $e) {
@@ -292,6 +283,55 @@ class ModelPersonne {
       }
     }
  
+    // nbr de patients par praticiens
+    public static function nbrPraticien(){
+ try{
+     $database = Model::getInstance();
+    $query = "select patient_id,Count(*) from personne group by praticien_id";
+   $statement = $database->prepare($query);
+   $statement->execute();
+   $results = $statement->fetchAll(PDO::FETCH_NUM);
+   return $results;
+ } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+    
+    
+    // avoir quelqu'un par son id 
+ public static function getPersonneById($id){
+      try{
+     $database = Model::getInstance();
+    $query = "select nom,prenom from personne where id = :id";
+   $statement = $database->prepare($query);
+   $statement->execute(['id'=>$id] );
+   $results = $statement->fetchAll(PDO::FETCH_NUM);
+   return $results;
+ } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+    // avoir tout les rdv
+ public static function getAllRdv(){
+   try {
+       $database = Model::getInstance();
+       $query = "select * from rendezvous where patient_id != 0";
+       $statement = $database->prepare($query);
+       $statement->execute();
+       $results = $statement->fetchAll(PDO::FETCH_NUM);
+       return $results;
+      } catch (PDOException $e) {
+       printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+       return NULL;
+      }  
+ }
+    
+    
+    
+    
+    
     public static function getOne($id) {
         try {
             $database = Model::getInstance();

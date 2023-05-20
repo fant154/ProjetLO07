@@ -1,13 +1,16 @@
 
 <!-- ----- debut config -->
 <?php
-
+define('DEBUG', TRUE);
 // Utile pour le débugage car c'est un interrupteur pour les echos et print_r.
 if (!defined('DEBUG')) {
     define('DEBUG', FALSE);
     
     
 }
+ //$dsn = 'mysql:dbname=besnardo;host=localhost;port=3307;charset=utf8';
+   //$username = 'besnardo';
+    //$password = 'besnardo';
 
 // ===============
 // Configuration de la base de données sur dev-isi
@@ -18,6 +21,7 @@ if (!defined('DEBUG')) {
 
 
 define ('LOCAL',TRUE);
+
 if (!defined('LOCAL')) {
     define('LOCAL', FALSE);
 

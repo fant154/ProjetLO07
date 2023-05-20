@@ -1,6 +1,6 @@
 <?php
-require "../model/Model";
-require "../model/ModelPersonne";
+
+require "../model/ModelPersonne.php";
 
 class ControllerAdministrateur{
     
@@ -58,13 +58,47 @@ class ControllerAdministrateur{
     
       // liste praticien avec leurs spés
     public static function listePraticien() {
-        $results = ModelPersonne::getAll();
+        $results = ModelPersonne::getAllPeople(1);
         // ----- Construction chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/user/viewAllSpecialite.php'; 
+        $vue = $root . '/app/view/user/viewAllPraticien.php'; 
         if (DEBUG)
             echo ("ControllerPersonne : specialiteReadAll : vue = $vue");
         require ($vue);
     }
       
+    // affiche le nombre de patients par praticiens
+    public static function patientPraticien(){
+    $results = ModelPersonne::nbrPatient();
+    // ----- Construction chemin de la vue
+    include 'config.php';
+    $vue = $root . '/app/view/administrateur/viewNbrPraticien.php';
+    if (DEBUG)
+     echo ("ControllerPersonne : patientPraticien : vue = $vue");
+    require ($vue);
+ 
+    }
+    
+    // affiche les infos globals 
+    public static function globalInfo(){
+        $admin = ModelPersonne::getAllPeople(0);
+        $patient = ModelPersonne::getAllPeople(2);
+        $praticien = ModelPersonne::getAllPeople(1);
+        $specialite = ModelPersonne::getAllspecialite();
+        $rdv = ModelPersonne::getAllRdv();
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/user/viewAllInfo.php'; 
+        if (DEBUG)
+            echo ("ControllerPersonne : specialiteReadAll : vue = $vue");
+        require ($vue);
+    
+    }
+    
+    
+    
+    
+    
+    
+    
 }
