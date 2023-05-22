@@ -6,7 +6,7 @@ require_once 'Model.php';
 
 class ModelPersonne{
 
-    private $id, $nom, $prenom, $adresse, $login, $password, $specialite, $specialite_id;
+    private $id, $nom, $prenom, $adresse, $login, $password,  $specialite_id;
 
      const ADMINISTRATEUR = 0;
      const PRATICIEN = 1;
