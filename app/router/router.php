@@ -1,8 +1,8 @@
 
 <!-- ----- debut Router1 -->
 <?php
-require ('../controller/ControllerPersonne.php');
-require ('../controller/ControllerAdministrateur.php');
+require_once ('../controller/ControllerPersonne.php');
+require_once ('../controller/ControllerAdministrateur.php');
 //require ('../controller/ControllerPatient.php');
 //require ('../controller/ControllerPraticien.php');
 // --- récupération de l'action passée dans l'URL
@@ -25,16 +25,19 @@ switch ($action) {
     case "viewAccueil":
         ControllerPersonne::$action();
         break;
-    case "listeSpecialite":
+   /* case "listeSpecialite":
     case "specialiteReadId":
     case "specialiteReadOne":
     case "specialiteCreate":
     case "specialiteCreated":
     case "listePraticien":
         ControllerAdministrateur::$action();
+           break;    */
 
     default:
         // $action = "doctolibAccueil";
         require("../view/viewAccueil.php");
 }
 ?>
+
+<!-- ----- fin Router1 -->

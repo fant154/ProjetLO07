@@ -1,7 +1,7 @@
 
 <!-- ----- debut config -->
 <?php
-define('DEBUG', TRUE);
+
 // Utile pour le débugage car c'est un interrupteur pour les echos et print_r.
 if (!defined('DEBUG')) {
     define('DEBUG', FALSE);
@@ -15,12 +15,11 @@ if (!defined('DEBUG')) {
 // ===============
 // Configuration de la base de données sur dev-isi
 
-//$dsn = 'mysql:dbname=schmittf;host=localhost;charset=utf8';
-//$username = 'schmittf';
-//$password = 'uBhNlOf6';
+$dsn = 'mysql:dbname=schmittf;host=localhost;charset=utf8';
+$username = 'schmittf';
+$password = 'uBhNlOf6';
 
 
-define ('LOCAL',TRUE);
 
 if (!defined('LOCAL')) {
     define('LOCAL', FALSE);

@@ -1,6 +1,6 @@
 <?php
 
-require "../model/ModelPersonne.php";
+require_once "../model/ModelPersonne.php";
 
 class ControllerAdministrateur{
     

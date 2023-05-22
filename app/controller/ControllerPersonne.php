@@ -181,6 +181,6 @@ class ControllerPersonne {
 
 }
 ?>
-<!-- ----- fin ControllerVin -->
+<!-- ----- fin ControllerPersonne -->
 
 
