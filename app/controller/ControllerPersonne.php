@@ -41,7 +41,7 @@ class ControllerPersonne {
         $results = ModelPersonne::getAllLoginInfos();
         $isInDatabse = FALSE;
         // ----- Construction chemin de la vue
-        include 'config.php';
+        include'config.php';
         foreach ($results as $login => $password) {
             if ([$login, $password] == [$infos_login, $infos_password]) {
                 $isInDatabase = TRUE;

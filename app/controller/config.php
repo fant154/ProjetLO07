@@ -22,7 +22,7 @@ $password = 'uBhNlOf6';
 
 
 if (!defined('LOCAL')) {
-    define('LOCAL', FALSE);
+    define('LOCAL', TRUE);
 
 }
 

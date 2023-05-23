@@ -1,14 +1,14 @@
 
 <!-- ----- début viewAllspecialite -->
 <?php
-
+session_start();
 require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 ?>
 
 <body>
   <div class="container">
       <?php
-      include $root . '/app/view/fragment/fragmentDoctolibMenu.html';
+      include $root . '/app/view/fragment/fragmentDoctolibMenu.php';
       include $root . '/app/view/fragment/fragmentDoctolibJumbotron.html';
       ?>
 
@@ -28,8 +28,9 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
           // La liste des Praticien avec les ids est dans une variable $results, dans $res il y a la liste des              
           foreach ($results as $element) {
               $spe=ModelPersonne::getOneSpe($element->getspecialite_id());
+              
           printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", $element->getId(), 
-            $element->getNom(),$element->getPrenom(),$element->getAdresse(),$spe[1]);
+            $element->getNom(),$element->getPrenom(),$element->getAdresse(),$spe[0][1]);
           }
           ?>
       </tbody>

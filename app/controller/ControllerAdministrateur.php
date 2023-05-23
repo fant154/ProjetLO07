@@ -9,11 +9,12 @@ class ControllerAdministrateur{
         $results = ModelPersonne::getAllspecialite();
         // ----- Construction chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/user/viewAllSpecialite.php'; 
-        if (DEBUG)
-            echo ("ControllerPersonne : specialiteReadAll : vue = $vue");
+        $vue = $root . '/app/view/administrateur/viewAllSpecialite.php'; 
         require ($vue);
-    }
+        if (DEBUG){
+        echo ("ControllerPersonne : specialiteReadAll : vue = $vue");  
+        }
+   }
     
     
    // Affiche un formulaire pour sélectionner un id de specialite
@@ -61,7 +62,7 @@ class ControllerAdministrateur{
         $results = ModelPersonne::getAllPeople(1);
         // ----- Construction chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/user/viewAllPraticien.php'; 
+        $vue = $root . '/app/view/administrateur/viewAllPraticien.php'; 
         if (DEBUG)
             echo ("ControllerPersonne : specialiteReadAll : vue = $vue");
         require ($vue);
@@ -69,7 +70,7 @@ class ControllerAdministrateur{
       
     // affiche le nombre de patients par praticiens
     public static function patientPraticien(){
-    $results = ModelPersonne::nbrPatient();
+    $results = ModelPersonne::nbrPraticien();
     // ----- Construction chemin de la vue
     include 'config.php';
     $vue = $root . '/app/view/administrateur/viewNbrPraticien.php';
@@ -88,7 +89,7 @@ class ControllerAdministrateur{
         $rdv = ModelPersonne::getAllRdv();
         // ----- Construction chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/user/viewAllInfo.php'; 
+        $vue = $root . '/app/view/administrateur/viewAllInfo.php'; 
         if (DEBUG)
             echo ("ControllerPersonne : specialiteReadAll : vue = $vue");
         require ($vue);

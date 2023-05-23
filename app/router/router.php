@@ -3,8 +3,8 @@
 <?php
 require_once ('../controller/ControllerPersonne.php');
 require_once ('../controller/ControllerAdministrateur.php');
-//require ('../controller/ControllerPatient.php');
-//require ('../controller/ControllerPraticien.php');
+//require_once ('../controller/ControllerPatient.php');
+//require_once ('../controller/ControllerPraticien.php');
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
 
@@ -25,14 +25,16 @@ switch ($action) {
     case "viewAccueil":
         ControllerPersonne::$action();
         break;
-   /* case "listeSpecialite":
+    case "listeSpecialite":
     case "specialiteReadId":
     case "specialiteReadOne":
     case "specialiteCreate":
     case "specialiteCreated":
     case "listePraticien":
+    case "patientPraticien":
+        case"globalInfo":
         ControllerAdministrateur::$action();
-           break;    */
+           break;   
 
     default:
         // $action = "doctolibAccueil";

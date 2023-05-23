@@ -1,14 +1,14 @@
 
 <!-- ----- début viewAllspecialite -->
 <?php
-
+session_start();
 require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 ?>
 
 <body>
   <div class="container">
       <?php
-      include $root . '/app/view/fragment/fragmentDoctolibMenu.html';
+      include $root . '/app/view/fragment/fragmentDoctolibMenu.php';
       include $root . '/app/view/fragment/fragmentDoctolibJumbotron.html';
       ?>
       <h4>Table des praticiens</h4>
@@ -29,7 +29,7 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
           foreach ($praticien as $element) {
               $spe=ModelPersonne::getOneSpe($element->getspecialite_id());
           printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", $element->getId(), 
-            $element->getNom(),$element->getPrenom(),$element->getAdresse(),$spe[1]);
+            $element->getNom(),$element->getPrenom(),$element->getAdresse(),$spe[0][1]);
           }
           ?>
       </tbody>
@@ -49,11 +49,13 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
       </thead>
       <tbody>
           <?php
-          // La liste des Praticien avec les ids est dans une variable $praticien             
+          // La liste des Patients avec les ids est dans une variable $praticien             
           foreach ($patient as $element) {
-              $spe=ModelPersonne::getOneSpe($element->getspecialite_id());
-          printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td></tr>", $element->getId(), 
-            $element->getNom(),$element->getPrenom(),$element->getAdresse());
+              
+                    $spe=ModelPersonne::getOneSpe($element->getspecialite_id());
+                printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td></tr>", $element->getId(), 
+                  $element->getNom(),$element->getPrenom(),$element->getAdresse());
+          
           }
           ?>
       </tbody>
@@ -73,9 +75,9 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
       </thead>
       <tbody>
           <?php
-          // La liste des Praticien avec les ids est dans une variable $praticien             
-          foreach ($administrateur as $element) {
-              $spe=ModelPersonne::getOneSpe($element->getspecialite_id());
+          // La liste des Admins avec les ids est dans une variable $praticien             
+          foreach ($admin as $element) {
+              
           printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td></tr>", $element->getId(), 
             $element->getNom(),$element->getPrenom(),$element->getAdresse());
           }
@@ -103,7 +105,7 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
     </table>
       
       <h4>Table des rendez-vous</h4>
-      `id`, `patient_id`, `praticien_id`, `rdv_date`
+      
         <table class = "table table-striped table-bordered">
       <thead>
         <tr>
@@ -117,37 +119,15 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
       </thead>
       <tbody>
           <?php
-          // La liste des Praticien avec les ids est dans une variable $praticien             
+          // La liste des rdv             
           foreach ($rdv as $element) {
-              $spe=ModelPersonne::getOneSpe($element->getspecialite_id());
-          printf("<tr><td>%d</td><td>%d</td><td>%d</td><td>%s</td></tr>",$rdv[0],$rdv[1],$rdv[2],$rdv[3] );
+          printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",$element[0],$element[1],$element[2],$element[3]);
           }
           ?>
       </tbody>
     </table>
       
-        <table class = "table table-striped table-bordered">
-      <thead>
-        <tr>
-          
-          <th scope = "col">id</th>
-          <th scope = "col">nom</th>
-          <th scope = "col">prenom</th>
-          <th scope = "col">adresse</th>
-          <th scope = "col">spécialité</th>
-        </tr>
-      </thead>
-      <tbody>
-          <?php
-          // La liste des Praticien avec les ids est dans une variable $praticien             
-          foreach ($praticien as $element) {
-              $spe=ModelPersonne::getOneSpe($element->getspecialite_id());
-          printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", $element->getId(), 
-            $element->getNom(),$element->getPrenom(),$element->getAdresse(),$spe[1]);
-          }
-          ?>
-      </tbody>
-    </table>
+     
       
   </div>
   <?php include $root . '/app/view/fragment/fragmentDoctolibFooter.html'; ?>

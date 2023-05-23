@@ -1,11 +1,12 @@
 <?php
+session_start();
 require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 ?>
 
 <body>
   <div class="container">
       <?php
-      include $root . '/app/view/fragment/fragmentDoctolibMenu.html';
+      include $root . '/app/view/fragment/fragmentDoctolibMenu.php';
       include $root . '/app/view/fragment/fragmentDoctolibJumbotron.html';
       ?>
 
@@ -26,8 +27,8 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
               else{
                   $res= ModelPersonne::getPersonneById($element[0]);
               }
-           printf("<tr><td>%s</td><td>%s</td><td>%d</td></tr>", $res[0], $res[1],
-             $element[1]);
+           printf("<tr><td>%s</td><td>%s</td><td>%d</td></tr>", $res[0][0], $res[0][1],
+             $element[1][0]);
           }
           ?>
       </tbody>

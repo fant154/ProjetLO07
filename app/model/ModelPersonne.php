@@ -269,12 +269,12 @@ class ModelPersonne{
   }
  }
     // On récupère tous les praticiens 
-    public static function getAllPeople($status){
+    public static function getAllPeople($statut){
         try {
        $database = Model::getInstance();
-       $query = "select * from personne where status= :status";
+       $query = "select * from personne where statut= :statut";
        $statement = $database->prepare($query);
-       $statement->execute(['status'=> $status]);
+       $statement->execute(['statut'=> $statut]);
        $results = $statement->fetchAll(PDO::FETCH_CLASS,'ModelPersonne');
        return $results;
       } catch (PDOException $e) {
@@ -287,7 +287,7 @@ class ModelPersonne{
     public static function nbrPraticien(){
  try{
      $database = Model::getInstance();
-    $query = "select patient_id,Count(*) from personne group by praticien_id";
+    $query = "select patient_id,Count(distinct praticien_id) from rendezvous where patient_id != 0 group by patient_id";
    $statement = $database->prepare($query);
    $statement->execute();
    $results = $statement->fetchAll(PDO::FETCH_NUM);
@@ -306,7 +306,7 @@ class ModelPersonne{
     $query = "select nom,prenom from personne where id = :id";
    $statement = $database->prepare($query);
    $statement->execute(['id'=>$id] );
-   $results = $statement->fetchAll(PDO::FETCH_NUM);
+   $results = $statement->fetchAll();
    return $results;
  } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());

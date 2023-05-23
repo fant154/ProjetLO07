@@ -40,9 +40,9 @@
                         <li><a class='dropdown-item' href='router.php?action=specialiteCreate'>Insertion d'une nouvelle spécialité</a></li> 
                         <li><hr></li> 
                         <li><a class='dropdown-item' href='router.php?action=listePraticien'>Liste des praticiens avec leur spécialité</a></li> 
-                        <li><a class='dropdown-item' href='router.php?action=Nbrpraticien'>Nombre de praticiens par patient</a></li> 
+                        <li><a class='dropdown-item' href='router.php?action=patientPraticien'>Nombre de praticiens par patient</a></li> 
                         <li><hr></li>
-                        <li><a class='dropdown-item' href='router.php?action=infoGlobal'>Info</a></li> 
+                        <li><a class='dropdown-item' href='router.php?action=globalInfo'>Info</a></li> 
                     </ul>
                 </li>");  
                     elseif($_SESSION['status']== 1)
