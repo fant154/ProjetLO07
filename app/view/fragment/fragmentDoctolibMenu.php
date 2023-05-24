@@ -62,9 +62,9 @@
                         echo(" <li class='nav-item dropdown'>
                     <a class='nav-link dropdown-toggle' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Patient</a>
                     <ul class='dropdown-menu'>
-                        <li><a class='dropdown-item' href='router.php?action=vinReadAll'>Mon Compte</a></li>
-                        <li><a class='dropdown-item' href='router.php?action=vinReadId'>Liste de mes rendez vous</a></li>
-                        <li><a class='dropdown-item' href='router.php?action=vinReadId'>Prendre rendez vous avec un praticien</a></li>
+                        <li><a class='dropdown-item' href='router.php?action=monCompte'>Mon Compte</a></li>
+                        <li><a class='dropdown-item' href='router.php?action=listeMesRdv'>Liste de mes rendez vous</a></li>
+                        <li><a class='dropdown-item' href='router.php?action=choisirPraticien'>Prendre rendez vous avec un praticien</a></li>
                         
                     </ul>
                 </li>");  

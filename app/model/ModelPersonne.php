@@ -72,7 +72,7 @@ class ModelPersonne{
     }
 
     function getLogin() {
-        return $this->Login;
+        return $this->login;
     }
 
     function getPassword() {
@@ -268,7 +268,7 @@ class ModelPersonne{
    return -1;
   }
  }
-    // On récupère tous les praticiens 
+    // On récupère tous les types de personne
     public static function getAllPeople($statut){
         try {
        $database = Model::getInstance();
@@ -330,67 +330,34 @@ class ModelPersonne{
     
     
     
-    
-    
-    public static function getOne($id) {
-        try {
-            $database = Model::getInstance();
-            $query = "select * from producteur where id = :id";
-            $statement = $database->prepare($query);
-            $statement->execute([
-                'id' => $id
-            ]);
-            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelProducteur");
-            return $results;
-        } catch (PDOException $e) {
-            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-            return NULL;
-        }
-    }
-
-    public static function getRegions() {
-        try {
-            $database = Model::getInstance();
-
-            $query = "select distinct (region) from producteur";
-            $statement = $database->query($query);
-
-            $statement->execute();
-            $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-            return $results;
-        } catch (PDOException $e) {
-            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-            return -1;
-        }
-    }
-
-    public static function update() {
-        echo ("ModelVin : update() TODO ....");
-        return null;
-    }
-
-    public static function delete() {
-        echo ("ModelVin : delete() TODO ....");
-        return null;
-    }
-
-    public static function getNbProducteursRegions() {
-        try {
-            $database = Model::getInstance();
-
-            $query = "select region, count(*) from producteur group by region; ";
-            $statement = $database->query($query);
-
-            $statement->execute();
-            $results = $statement->fetchAll(PDO::FETCH_KEY_PAIR);
-
-            return $results;
-        } catch (PDOException $e) {
-            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-            return -1;
-        }
-    }
-
+     // avoir tout les rdv libres
+ public static function getLibreRdv($praticien_id){
+   try {
+       $database = Model::getInstance();
+       $query = "select * from rendezvous where patient_id = 0 And praticien_id = :praticien_id";
+       $statement = $database->prepare($query);
+       $statement->execute(['praticien_id'=>$praticien_id ]);
+       $results = $statement->fetchAll(PDO::FETCH_NUM);
+       return $results;
+      } catch (PDOException $e) {
+       printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+       return NULL;
+      }  
+ }
+ 
+    // réserver un rdv
+ public static function reserverRdv($id,$patient_id){
+   try {
+       $database = Model::getInstance();
+       $query = "UPDATE rendezvous SET patient_id = :patient_id WHERE id = :id";
+       $statement = $database->prepare($query);
+       $statement->execute(['id'=>$id , 'patient_id'=>$patient_id]);
+      } catch (PDOException $e) {
+       printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+       return NULL;
+      }  
+ }
+ 
 }
 ?>
 <!-- ----- fin ModelPersonne -->

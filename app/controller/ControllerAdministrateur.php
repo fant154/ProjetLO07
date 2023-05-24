@@ -1,3 +1,4 @@
+<!-- ----- debut ControllerAdministrateur -->
 <?php
 
 require_once "../model/ModelPersonne.php";
@@ -94,12 +95,7 @@ class ControllerAdministrateur{
             echo ("ControllerPersonne : specialiteReadAll : vue = $vue");
         require ($vue);
     
-    }
-    
-    
-    
-    
-    
-    
-    
+    }   
 }
+?>
+<!-- ----- fin ControllerAdministrateur -->

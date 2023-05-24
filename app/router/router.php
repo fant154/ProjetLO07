@@ -3,7 +3,7 @@
 <?php
 require_once ('../controller/ControllerPersonne.php');
 require_once ('../controller/ControllerAdministrateur.php');
-//require_once ('../controller/ControllerPatient.php');
+require_once ('../controller/ControllerPatient.php');
 //require_once ('../controller/ControllerPraticien.php');
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -34,6 +34,13 @@ switch ($action) {
     case "patientPraticien":
         case"globalInfo":
         ControllerAdministrateur::$action();
+        break;
+    case "monCompte":
+    case "listeMesRdv":
+    case "choisirPraticien":
+    case "choisirRdv":
+    case "RdvChoisi":
+        ControllerPatient::$action();
            break;   
 
     default:
