@@ -4,13 +4,13 @@
 <?php
 require_once 'Model.php';
 
-class ModelPersonne{
+class ModelPersonne {
 
-    private $id, $nom, $prenom, $adresse, $login, $password,  $specialite_id;
+    private $id, $nom, $prenom, $adresse, $login, $password, $specialite_id;
 
-     const ADMINISTRATEUR = 0;
-     const PRATICIEN = 1;
-     const PATIENT = 2;
+    const ADMINISTRATEUR = 0;
+    const PRATICIEN = 1;
+    const PATIENT = 2;
 
     // pas possible d'avoir 2 constructeurs
     public function __construct($id = NULL, $nom = NULL, $prenom = NULL, $adresse = NULL, $login = NULL, $password = NULL, $specialite_id = NULL) {
@@ -22,7 +22,7 @@ class ModelPersonne{
             $this->adresse = $adresse;
             $this->login = $login;
             $this->password = $password;
-            
+
             $this->specialite_id = $specialite_id;
         }
     }
@@ -107,8 +107,9 @@ class ModelPersonne{
                 'infos_login' => $infos_login
             ]);
             $results = $statement->fetchAll(PDO::FETCH_KEY_PAIR);
-            foreach ($results as $login => $id)
+            foreach ($results as $login => $id) {
                 $currentUserId = $id;
+            }
 
 
             return $currentUserId;
@@ -134,8 +135,8 @@ class ModelPersonne{
             return NULL;
         }
     }
-    
-        public static function getStatusWithId($currentUserId) {
+
+    public static function getStatusWithId($currentUserId) {
         try {
             $database = Model::getInstance();
             $query = "select statut from personne where id = :currentUserId";
@@ -144,7 +145,7 @@ class ModelPersonne{
                 'currentUserId' => $currentUserId
             ]);
             $results = $statement->fetch();
-           $status  = $results['statut'];
+            $status = $results['statut'];
             return $status;
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -195,6 +196,7 @@ class ModelPersonne{
             return NULL;
         }
     }
+
 // On récupère toutes les spécialités dans un tableau numéroté
     public static function getAllspecialite() {
         try {
@@ -209,24 +211,24 @@ class ModelPersonne{
             return NULL;
         }
     }
-    
+
     // on récupère tout les ID des specialite
     public static function getAllIdspecialite() {
-      try {
-       $database = Model::getInstance();
-       $query = "select id from specialite";
-       $statement = $database->prepare($query);
-       $statement->execute();
-       $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-       return $results;
-      } catch (PDOException $e) {
-       printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-       return NULL;
-      }
-     }
-     
-     // On récupère un ID spécifique 
-     public static function getOneSpe($id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select id from specialite";
+            $statement = $database->prepare($query);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
+    // On récupère un ID spécifique 
+    public static function getOneSpe($id) {
         try {
             $database = Model::getInstance();
             $query = "select * from specialite where id = :id";
@@ -241,123 +243,135 @@ class ModelPersonne{
             return NULL;
         }
     }
-    
-     
+
     // insertion d'une spe
-     public static function specialiteInsert($specialite) {
-  try {
-   $database = Model::getInstance();
-
-   // recherche de la valeur de la clé = max(id) + 1
-   $query = "select max(id) from specialite";
-   $statement = $database->query($query);
-   $tuple = $statement->fetch();
-   $id = $tuple['0'];
-   $id++;
-
-   // ajout d'un nouveau tuple;
-   $query = "insert into specialite value (:id, :specialite)";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id,
-     'specialite' => $specialite
-   ]);
-   return $id;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return -1;
-  }
- }
-    // On récupère tous les types de personne
-    public static function getAllPeople($statut){
+    public static function specialiteInsert($specialite) {
         try {
-       $database = Model::getInstance();
-       $query = "select * from personne where statut= :statut";
-       $statement = $database->prepare($query);
-       $statement->execute(['statut'=> $statut]);
-       $results = $statement->fetchAll(PDO::FETCH_CLASS,'ModelPersonne');
-       return $results;
-      } catch (PDOException $e) {
-       printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-       return NULL;
-      }
+            $database = Model::getInstance();
+
+            // recherche de la valeur de la clé = max(id) + 1
+            $query = "select max(id) from specialite";
+            $statement = $database->query($query);
+            $tuple = $statement->fetch();
+            $id = $tuple['0'];
+            $id++;
+
+            // ajout d'un nouveau tuple;
+            $query = "insert into specialite value (:id, :specialite)";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'id' => $id,
+                'specialite' => $specialite
+            ]);
+            return $id;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return -1;
+        }
     }
- 
+
+    // On récupère tous les types de personne
+    public static function getAllPeople($statut) {
+        try {
+            $database = Model::getInstance();
+            $query = "select * from personne where statut= :statut";
+            $statement = $database->prepare($query);
+            $statement->execute(['statut' => $statut]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, 'ModelPersonne');
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
     // nbr de patients par praticiens
-    public static function nbrPraticien(){
- try{
-     $database = Model::getInstance();
-    $query = "select patient_id,Count(distinct praticien_id) from rendezvous where patient_id != 0 group by patient_id";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_NUM);
-   return $results;
- } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
-    
-    
+    public static function nbrPraticien() {
+        try {
+            $database = Model::getInstance();
+            $query = "select patient_id,Count(distinct praticien_id) from rendezvous where patient_id != 0 group by patient_id";
+            $statement = $database->prepare($query);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_NUM);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
     // avoir quelqu'un par son id 
- public static function getPersonneById($id){
-      try{
-     $database = Model::getInstance();
-    $query = "select nom,prenom from personne where id = :id";
-   $statement = $database->prepare($query);
-   $statement->execute(['id'=>$id] );
-   $results = $statement->fetchAll();
-   return $results;
- } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
+    public static function getPersonneById($id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select nom,prenom from personne where id = :id";
+            $statement = $database->prepare($query);
+            $statement->execute(['id' => $id]);
+            $results = $statement->fetchAll();
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
     // avoir tout les rdv
- public static function getAllRdv(){
-   try {
-       $database = Model::getInstance();
-       $query = "select * from rendezvous where patient_id != 0";
-       $statement = $database->prepare($query);
-       $statement->execute();
-       $results = $statement->fetchAll(PDO::FETCH_NUM);
-       return $results;
-      } catch (PDOException $e) {
-       printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-       return NULL;
-      }  
- }
-    
-    
-    
-     // avoir tout les rdv libres
- public static function getLibreRdv($praticien_id){
-   try {
-       $database = Model::getInstance();
-       $query = "select * from rendezvous where patient_id = 0 And praticien_id = :praticien_id";
-       $statement = $database->prepare($query);
-       $statement->execute(['praticien_id'=>$praticien_id ]);
-       $results = $statement->fetchAll(PDO::FETCH_NUM);
-       return $results;
-      } catch (PDOException $e) {
-       printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-       return NULL;
-      }  
- }
- 
+    public static function getAllRdv() {
+        try {
+            $database = Model::getInstance();
+            $query = "select * from rendezvous where patient_id != 0";
+            $statement = $database->prepare($query);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_NUM);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
+    // avoir tout les rdv libres
+    public static function getLibreRdv($praticien_id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select * from rendezvous where patient_id = 0 And praticien_id = :praticien_id";
+            $statement = $database->prepare($query);
+            $statement->execute(['praticien_id' => $praticien_id]);
+            $results = $statement->fetchAll(PDO::FETCH_NUM);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
     // réserver un rdv
- public static function reserverRdv($id,$patient_id){
-   try {
-       $database = Model::getInstance();
-       $query = "UPDATE rendezvous SET patient_id = :patient_id WHERE id = :id";
-       $statement = $database->prepare($query);
-       $statement->execute(['id'=>$id , 'patient_id'=>$patient_id]);
-      } catch (PDOException $e) {
-       printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-       return NULL;
-      }  
- }
- 
+    public static function reserverRdv($id, $patient_id) {
+        try {
+            $database = Model::getInstance();
+            $query = "UPDATE rendezvous SET patient_id = :patient_id WHERE id = :id";
+            $statement = $database->prepare($query);
+            $statement->execute(['id' => $id, 'patient_id' => $patient_id]);
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
+    public static function getRdvForPraticien($praticien_id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select rdv_date from rendezvous where praticien_id = :praticien_id";
+            $statement = $database->prepare($query);
+            $statement->execute(['praticien_id' => $praticien_id]);
+            $results = $statement->fetchAll(PDO::FETCH_NUM);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
 }
 ?>
 <!-- ----- fin ModelPersonne -->

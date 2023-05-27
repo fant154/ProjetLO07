@@ -1,9 +1,10 @@
 
 <!-- ----- debut Router1 -->
 <?php
-require_once ('../controller/ControllerPersonne.php');
+//require_once ('../controller/ControllerPersonne.php');
 require_once ('../controller/ControllerAdministrateur.php');
 require_once ('../controller/ControllerPatient.php');
+require_once ('../controller/ControllerPraticien.php');
 //require_once ('../controller/ControllerPraticien.php');
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -23,8 +24,7 @@ switch ($action) {
     case "signinInfosAnalysis":
     case "userLogout":
     case "viewAccueil":
-        ControllerPersonne::$action();
-        break;
+        
     case "listeSpecialite":
     case "specialiteReadId":
     case "specialiteReadOne":
@@ -32,7 +32,7 @@ switch ($action) {
     case "specialiteCreated":
     case "listePraticien":
     case "patientPraticien":
-        case"globalInfo":
+    case"globalInfo":
         ControllerAdministrateur::$action();
         break;
     case "monCompte":
@@ -41,7 +41,13 @@ switch ($action) {
     case "choisirRdv":
     case "RdvChoisi":
         ControllerPatient::$action();
-           break;   
+        break;
+    case "ajouterDisponibilitesAnalysis":
+        case "ajouterDisponibilitesSuccess":
+            case "ajouterDisponibilitesError":
+    case "ajouterDisponibilites":
+        ControllerPraticien::$action();
+        break;
 
     default:
         // $action = "doctolibAccueil";

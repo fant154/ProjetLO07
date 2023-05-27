@@ -50,12 +50,12 @@
                     <a class='nav-link dropdown-toggle' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Praticien</a>
                     <ul class='dropdown-menu'>
                         <li><a class='dropdown-item' href='router.php?action=vinReadAll'>Liste de mes disponibilités</a></li>
-                        <li><a class='dropdown-item' href='router.php?action=vinReadId'>Ajout de nouvelles disponibilités</a></li>
+                        <li><a class='dropdown-item' href='router.php?action=ajouterDisponibilites'>Ajout de nouvelles disponibilités</a></li>
                         
                         <li><hr></li> 
                         <li><a class='dropdown-item' href='router.php?action=vinCreate'>Liste des rendez vous avec le nom des patients</a></li> 
                         <li><a class='dropdown-item' href='router.php?action=vinCreate'>Liste de mes patients (sans doublons)</a></li> 
-                        <
+                        
                     </ul>
                 </li>");  
                     elseif($_SESSION['status']== 2)
