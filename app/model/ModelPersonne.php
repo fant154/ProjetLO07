@@ -344,6 +344,19 @@ class ModelPersonne {
             return NULL;
         }
     }
+    public static function getRdv($praticien_id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select rdv_date from rendezvous where praticien_id = :praticien_id";
+            $statement = $database->prepare($query);
+            $statement->execute(['praticien_id' => $praticien_id]);
+            $results = $statement->fetchAll(PDO::FETCH_COLUMN);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 
     // réserver un rdv
     public static function reserverRdv($id, $patient_id) {
@@ -366,6 +379,30 @@ class ModelPersonne {
             $statement->execute(['praticien_id' => $praticien_id]);
             $results = $statement->fetchAll(PDO::FETCH_NUM);
             return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
+    public static function ajouterDisponibilitesPraticien($praticien_id, $disponibilites) {
+        try {
+            foreach ($disponibilites as $disponibilite) {
+                print_r($disponibilite);
+                $database = Model::getInstance();
+                $query = "select max(id) from rendezvous";
+                $statement = $database->query($query);
+                $tuple = $statement->fetch();
+                $id = $tuple['0'];
+                $id++;
+                //création d'un nouvel id pour le rendez vous 
+                $query = "insert into rendezvous (id, patient_id, praticien_id, rdv_date) VALUES (:id, '0', :praticien_id, :disponibilite)";
+                $statement = $database->prepare($query);
+                $statement->execute(['id' => $id,'praticien_id' => $praticien_id, 'disponibilite' => $disponibilite]);
+                
+            }
+           
+            
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;

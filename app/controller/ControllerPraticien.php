@@ -22,11 +22,24 @@ class ControllerPraticien {
         session_start();
         $praticien_id = ModelPersonne::getIdWithLogin($_SESSION['login']);
         $results = ModelPersonne::getRdvForPraticien($praticien_id);
+        $disponibilites = $_GET['disponibilites'];
+       
+        $rdv = ModelPersonne::getRdv($praticien_id );
+        $disponibilites = "$disponibilites" . " à " ."10h";
+         
         if ($_GET['nombreRdv'] > 8) {
             include 'config.php';
             $vue = $root . '/app/view/praticien/viewAjouterDisponibilitesError.php';
             require ($vue);
-        } else {
+        } 
+        elseif(in_array($disponibilites,$rdv)) {
+        
+            include 'config.php';
+            $vue = $root . '/app/view/praticien/viewAjouterDisponibilitesErrorDate.php';
+            require ($vue);
+            
+        }
+        else {
             $allRdv = array();
             $disponibilites = $_GET['disponibilites'];
             
@@ -36,6 +49,7 @@ class ControllerPraticien {
             }
             include 'config.php';
         $vue = $root . '/app/view/praticien/viewAjouterDisponibilitesConfirm.php';
+        $_SESSION['disponibilites'] = $allRdv;
         require ($vue);
             
             
@@ -50,9 +64,14 @@ class ControllerPraticien {
     
     public static function ajouterDisponibilitesSuccess() {
         
+        session_start();
         //$praticien_id = ModelPersonne::getIdWithLogin($_SESSION['login']);
         //$results = ModelPersonne::getLibreRdvForPraticien($praticien_id);
         // ----- Construction chemin de la vue
+        
+        $praticien_id = ModelPersonne::getIdWithLogin($_SESSION['login']);
+       $results = ModelPersonne::ajouterDisponibilitesPraticien($praticien_id, $_SESSION['disponibilites']);
+       
         include 'config.php';
         $vue = $root . '/app/view/praticien/viewAjouterDisponibilitesSuccess.php';
         require ($vue);

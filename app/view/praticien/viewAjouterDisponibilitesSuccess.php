@@ -1,5 +1,8 @@
 
 <?php
+if (!isset($_SESSION)){
+    session_start();
+}
 
 require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 ?>
