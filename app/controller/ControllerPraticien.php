@@ -5,6 +5,19 @@ require_once "../model/ModelPersonne.php";
 class ControllerPraticien {
 
 // affiche toutes les spécialités
+    
+    public static function listeDisponibilites() {
+        session_start();
+        $praticien_id = ModelPersonne::getIdWithLogin($_SESSION['login']);
+        $results = ModelPersonne::getLibreRdv($praticien_id);
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/praticien/viewListeDisponibilites.php';
+        require ($vue);
+        if (DEBUG) {
+            echo ("ControllerPersonne : specialiteReadAll : vue = $vue");
+        }
+    }
     public static function ajouterDisponibilites() {
         session_start();
         //$praticien_id = ModelPersonne::getIdWithLogin($_SESSION['login']);
