@@ -79,14 +79,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="router.php?action=vinReadAll">Liste des spécialités</a></li>
-                        <li><a class="dropdown-item" href="router.php?action=vinReadId">Sélection d'ubne spécialité par son id</a></li>
-                        <li><a class="dropdown-item" href="router.php?action=vinCreate">Insertion d'une nouvelle spécialité</a></li> 
-                        <li><hr></li> 
-                        <li><a class="dropdown-item" href="router.php?action=vinCreate">Liste des praticiens avec leur spécialité</a></li> 
-                        <li><a class="dropdown-item" href="router.php?action=vinCreate">Nombre de praticiens par patient</a></li> 
-                        <li><hr></li>
-                        <li><a class="dropdown-item" href="router.php?action=vinCreate">Info</a></li> 
+                        <li><a class="dropdown-item" href="../view/user/viewFonctionnalite.php">Proposez une fonctionnalité originale</a></li>
+                        <li><a class="dropdown-item" href="../view/user/viewAmelioration.php">Proposez une amélioration du code MVC</a></li>
+                        
                     </ul>
                 </li>
 

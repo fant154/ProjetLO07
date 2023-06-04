@@ -1,5 +1,5 @@
  
-<!-- ----- debut de la page cave_acceuil -->
+<!-- ----- debut de la page viewacceuil -->
 <?php if(!isset($_SESSION)){
     session_start();
 }?>
@@ -19,7 +19,7 @@
     include 'fragment/fragmentDoctolibFooter.html';
     ?>
 
-    <!-- ----- fin de la page cave_acceuil -->
+    <!-- ----- fin de la page viewacceuil -->
 
 </body>
 </html>
