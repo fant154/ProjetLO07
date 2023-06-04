@@ -1,7 +1,9 @@
 
 <!-- ----- début viewMesRdv -->
 <?php
-session_start();
+if (!isset($_SESSION)){
+    session_start();
+}
 require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 ?>
 
@@ -18,17 +20,18 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
           
           <th scope = "col">Nom</th>
           <th scope = "col">Prenom</th>
-          <th scope = "col">Rendez-vous</th>
+          <th scope = "col">Adresse</th>
         </tr>
       </thead>
       <tbody>
           <?php
-          // La liste des rdv             
-          foreach ($results as $element) {
-              
-                 
-                  printf("<tr><td>%s</td><td>%s</td><td>%s</td></tr>",$inf_praticien[0][0],$inf_praticien[0][1],$element[3]);
-              
+          // La liste des rdv   
+$i=0;          
+          foreach ($names as $name) {
+             
+                  
+                  printf("<tr><td>%s</td><td>%s</td><td>%s</td></tr>",$name,$first_names[$i],$adresses[$i]);
+              $i++;
           
           }
           ?>

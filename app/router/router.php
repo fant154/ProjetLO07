@@ -46,6 +46,9 @@ switch ($action) {
         case "ajouterDisponibilitesSuccess":
             case "ajouterDisponibilitesError":
     case "ajouterDisponibilites":
+    case "listeDisponibilites":
+    case "listeRdvNomPatients":
+    case "listePatients":
         ControllerPraticien::$action();
         break;
 

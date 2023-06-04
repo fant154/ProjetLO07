@@ -344,6 +344,80 @@ class ModelPersonne {
             return NULL;
         }
     }
+    
+    
+    public static function getPatientNameWithId($patient_id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select distinct nom from personne where  id = :patient_id";
+            $statement = $database->prepare($query);
+            $statement->execute(['patient_id' => $patient_id]);
+            $results = $statement->fetchAll(PDO::FETCH_NUM);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
+    
+     public static function getPatientAdresseWithId($patient_id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select adresse from personne where  id = :patient_id";
+            $statement = $database->prepare($query);
+            $statement->execute(['patient_id' => $patient_id]);
+            $results = $statement->fetchAll(PDO::FETCH_NUM);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
+    public static function getPatientFirstNameWithId($patient_id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select distinct prenom from personne where  id = :patient_id";
+            $statement = $database->prepare($query);
+            $statement->execute(['patient_id' => $patient_id]);
+            $results = $statement->fetchAll(PDO::FETCH_NUM);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
+    
+    
+    public static function getPatientIdWithRdv($rdv) {
+        try {
+            $database = Model::getInstance();
+            $query = "select patient_id from rendezvous where rdv_date = :rdv and patient_id != 0";
+            $statement = $database->prepare($query);
+            $statement->execute(['rdv' => $rdv]);
+            $results = $statement->fetchAll(PDO::FETCH_NUM);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
+    public static function getRdvReserved($praticien_id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select rdv_date from rendezvous where praticien_id = :praticien_id and patient_id !=0";
+            $statement = $database->prepare($query);
+            $statement->execute(['praticien_id' => $praticien_id]);
+            $results = $statement->fetchAll(PDO::FETCH_COLUMN);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
     public static function getRdv($praticien_id) {
         try {
             $database = Model::getInstance();

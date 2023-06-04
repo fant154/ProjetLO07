@@ -1,7 +1,10 @@
 
 <!-- ----- début viewMesRdv -->
 <?php
-session_start();
+if (!isset($_SESSION)){
+    session_start();
+}
+
 require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 ?>
 
@@ -11,29 +14,24 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
       include $root . '/app/view/fragment/fragmentDoctolibMenu.php';
       include $root . '/app/view/fragment/fragmentDoctolibJumbotron.html';
       ?>
-
-      <table class = "table table-striped table-bordered">
-      <thead>
-        <tr>
-          
-          <th scope = "col">Nom</th>
-          <th scope = "col">Prenom</th>
-          <th scope = "col">Rendez-vous</th>
-        </tr>
-      </thead>
-      <tbody>
+<h4>Mes Disponibilités</h4>
+      <ul>
           <?php
+          
           // La liste des rdv             
-          foreach ($results as $element) {
-              
-                 
-                  printf("<tr><td>%s</td><td>%s</td><td>%s</td></tr>",$inf_praticien[0][0],$inf_praticien[0][1],$element[3]);
-              
+          foreach ($results as $line) {
+              if($line[1]== 0){
+                  
+                  printf("<li>%s</li>",$line[3]);
+              }
           
           }
           ?>
-      </tbody>
-    </table>
+          
+      </ul>
+          
+        
+      
       
      
   </div>
