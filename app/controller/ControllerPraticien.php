@@ -6,6 +6,63 @@ class ControllerPraticien {
 
 // affiche toutes les spécialités
     
+     public static function listePatients() {
+        session_start();
+        $praticien_id = ModelPersonne::getIdWithLogin($_SESSION['login']);
+        $listeRdv = ModelPersonne::getRdvReserved($praticien_id);
+        $ids = array();
+       
+        foreach($listeRdv as $Rdv){
+            echo('rdv');
+            print_r($Rdv);
+            $id = ModelPersonne::getPatientIdWithRdv($Rdv);
+            //echo('id');
+            //print_r($id);
+            if (!in_array($id[0][0], $ids)){
+               array_push($ids, $id[0][0]); 
+            }
+            
+        }
+        $names = array();
+        //print_r($ids);
+        foreach($ids as $id){
+            //print_r($id);
+            $name = ModelPersonne::getPatientNameWithId($id);
+            array_push($names, $name[0][0]);
+            
+        }
+        
+        $first_names = array();
+        //print_r($ids);
+        foreach($ids as $id){
+            //print_r($id);
+            $first_name = ModelPersonne::getPatientFirstNameWithId($id);
+            array_push($first_names, $first_name[0][0]);
+            
+        }
+        
+        $adresses = array();
+        //print_r($ids);
+        foreach($ids as $id){
+            //print_r($id);
+            $adresse = ModelPersonne::getPatientAdresseWithId($id);
+            array_push($adresses, $adresse[0][0]);
+            
+        }
+        //echo'firstames';
+        //print_r($first_names);
+        /*print_r($ids);*/
+        //$names = ModelPersonne::getNameWithId($currentUserId);
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/praticien/viewListePatients.php';
+        require ($vue);
+        if (DEBUG) {
+            echo ("ControllerPersonne : specialiteReadAll : vue = $vue");
+        }
+    }
+    
+    
     
     public static function listeRdvNomPatients() {
         session_start();

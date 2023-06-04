@@ -54,7 +54,7 @@
                         
                         <li><hr></li> 
                         <li><a class='dropdown-item' href='router.php?action=listeRdvNomPatients'>Liste des rendez vous avec le nom des patients</a></li> 
-                        <li><a class='dropdown-item' href='router.php?action=vinCreate'>Liste de mes patients (sans doublons)</a></li> 
+                        <li><a class='dropdown-item' href='router.php?action=listePatients'>Liste de mes patients (sans doublons)</a></li> 
                         
                     </ul>
                 </li>");  

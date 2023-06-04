@@ -360,6 +360,21 @@ class ModelPersonne {
         }
     }
     
+    
+     public static function getPatientAdresseWithId($patient_id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select adresse from personne where  id = :patient_id";
+            $statement = $database->prepare($query);
+            $statement->execute(['patient_id' => $patient_id]);
+            $results = $statement->fetchAll(PDO::FETCH_NUM);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
     public static function getPatientFirstNameWithId($patient_id) {
         try {
             $database = Model::getInstance();
