@@ -53,7 +53,7 @@
                         <li><a class='dropdown-item' href='router.php?action=ajouterDisponibilites'>Ajout de nouvelles disponibilités</a></li>
                         
                         <li><hr></li> 
-                        <li><a class='dropdown-item' href='router.php?action=vinCreate'>Liste des rendez vous avec le nom des patients</a></li> 
+                        <li><a class='dropdown-item' href='router.php?action=listeRdvNomPatients'>Liste des rendez vous avec le nom des patients</a></li> 
                         <li><a class='dropdown-item' href='router.php?action=vinCreate'>Liste de mes patients (sans doublons)</a></li> 
                         
                     </ul>
