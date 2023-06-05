@@ -48,7 +48,12 @@ class ControllerPatient{
        $results = ModelPersonne::getLibreRdv($_GET['praticien']);
         // ----- Construction chemin de la vue
         include 'config.php';
+        if($results){
         $vue = $root . '/app/view/patient/viewChoisirRdv.php'; 
+        }
+        else{
+            $vue = $root . '/app/view/viewAccueil.php'; 
+        }
         require ($vue);
         if (DEBUG){
         echo ("ControllerPatient : ChoisirRdv : vue = $vue");  

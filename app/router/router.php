@@ -1,11 +1,11 @@
 
 <!-- ----- debut Router1 -->
 <?php
-//require_once ('../controller/ControllerPersonne.php');
+
 require_once ('../controller/ControllerAdministrateur.php');
 require_once ('../controller/ControllerPatient.php');
 require_once ('../controller/ControllerPraticien.php');
-//require_once ('../controller/ControllerPraticien.php');
+require_once ('../controller/ControllerUser.php');
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
 
@@ -51,7 +51,10 @@ switch ($action) {
     case "listePatients":
         ControllerPraticien::$action();
         break;
-
+    case "Fonctionnalite";
+    case "Amelioration";
+        ControllerUser::$action();
+        break;
     default:
         // $action = "doctolibAccueil";
         require("../view/viewAccueil.php");

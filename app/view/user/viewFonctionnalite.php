@@ -1,8 +1,8 @@
 <!-- ----- debut de la page viewameliorer --> 
 
 <?php
+session_start();
 
-require_once '../../controller/config.php';
 
 require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 ?>
@@ -12,7 +12,7 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 <body>
   <div class="container">
     <?php
-      
+      include $root . 'app/view/fragment/fragmentDoctolibMenu.php';
       include $root . '/app/view/fragment/fragmentDoctolibJumbotronFonctionnalite.html';
     ?> 
 
