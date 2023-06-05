@@ -69,7 +69,7 @@ class ControllerAdministrateur{
         require ($vue);
     }
       
-    // affiche le nombre de patients par praticiens
+    // affiche le nombre de praticiens par patients
     public static function patientPraticien(){
     $results = ModelPersonne::nbrPraticien();
     // ----- Construction chemin de la vue

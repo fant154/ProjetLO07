@@ -25,11 +25,8 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
           <?php
           // La liste des rdv             
           foreach ($results as $element) {
-              
-                 
+              $inf_praticien= ModelPersonne::getPersonneById($element[2]);      
                   printf("<tr><td>%s</td><td>%s</td><td>%s</td></tr>",$inf_praticien[0][0],$inf_praticien[0][1],$element[3]);
-              
-          
           }
           ?>
       </tbody>
